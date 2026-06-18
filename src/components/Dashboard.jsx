@@ -63,8 +63,18 @@ const Dashboard = () => {
           Add Exercise
         </button>
       </div>
+
+      <marquee style={{margin:"50px"}}>
+<h3>Track your calories every day •</h3>
+
+      </marquee>
     </div>
   );
 };
 
 export default Dashboard;
+
+
+
+
+

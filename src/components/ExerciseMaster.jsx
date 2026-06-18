@@ -1,148 +1,110 @@
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Pencil, Trash2 } from "lucide-react";
-import FoodPopup from "./FoodPopup";
+import ExercisePopup from "./ExercisePopup";
 import Pagination from "./Pagination";
 
-const FoodMaster = () => {
-
+const ExerciseMaster = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-  const [foods, setFoods] = useState([]);
+  const [exercises, setExercises] = useState([]);
 
   const [editingIndex, setEditingIndex] = useState(null);
 
-  // useEffect(() => {
-    //     localStorage.setItem("mytodos", JSON.stringify(todos));
-    // }, [todos])
-
-
   useEffect(() => {
 
-    fetch("http://localhost:5000/food-master")
+    fetch("http://localhost:5000/exercise-master")
 
       .then((response) => response.json())
       .then((data) => {
-
-        setFoods(data);
-
+        setExercises(data);
       })
       .catch((err) => {
-
         console.log(err);
-
       });
   }, []);
 
-  const handleSaveFood = async (foodData) => {
+  const handleSaveExercise = async (exerciseData) => {
 
     if (editingIndex !== null) {
+      const editItem = exercises[editingIndex];
+      await fetch(`http://localhost:5000/exercise-master/${editItem.id}`, {
 
-      const editItem = foods[editingIndex];
-
-      await fetch(`http://localhost:5000/food-master/${editItem.id}`, {
-
-        method: "PUT",headers: { "Content-Type": "application/json"},
-        body: JSON.stringify(foodData)
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(exerciseData)
+      });
+      const updatedResponse = await fetch("http://localhost:5000/exercise-master");
       
-      });
-
-      const updatedResponse = await fetch("http://localhost:5000/food-master");
       const updatedData = await updatedResponse.json();
-
-      setFoods(updatedData);
-
+      setExercises(updatedData);
       setEditingIndex(null);
-
-      toast.success("Food updated successfully!");
-
+      toast.success("Exercise updated successfully!");
     } else {
-      await fetch("http://localhost:5000/food-master", {
-
+      await fetch("http://localhost:5000/exercise-master", {
         method: "POST",
-
-        headers: { "Content-Type": "application/json"},body: JSON.stringify(foodData)
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(exerciseData)
       });
-
-      const updatedResponse = await fetch("http://localhost:5000/food-master");
-
+      const updatedResponse = await fetch("http://localhost:5000/exercise-master");
       const updatedData = await updatedResponse.json();
-
-      setFoods(updatedData);
-
-      toast.success("Food added successfully!");
+      setExercises(updatedData);
+      toast.success("Exercise added successfully!");
     }
     setIsPopupOpen(false);
   };
 
-  const deleteFood = async (indexToDelete) => {
-
-
-    const item = foods[indexToDelete];
-
-    await fetch(`http://localhost:5000/food-master/${item.id}`, { method: "DELETE" });
-
-    const updatedResponse = await fetch("http://localhost:5000/food-master");
-
+  const deleteExercise = async (indexToDelete) => {
+    const item = exercises[indexToDelete];
+    await fetch(`http://localhost:5000/exercise-master/${item.id}`, { method: "DELETE" });
+    const updatedResponse = await fetch("http://localhost:5000/exercise-master");
     const updatedData = await updatedResponse.json();
-
-    setFoods(updatedData);
-
-    toast.success("Food deleted successfully!");
+    setExercises(updatedData);
+    toast.success("Exercise deleted successfully!");
   };
 
   return (
-
-
     <div className="page-container">
-
       <div className="page-header" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
-        <h2>Food Master</h2>
-        
-
+        <h2>Exercise Master</h2>
         <button className="btn-grey" onClick={() => {
-
           setEditingIndex(null);
           setIsPopupOpen(true);
         }}>
-          Add Food
+          Add Exercise
         </button>
       </div>
 
       <div className="table-container">
-
         <table className="app-table">
-
           <thead>
             <tr>
               <th>Image</th>
-                <th>Food Name</th>
-                <th>Unit</th>
-              <th>Calories Per Unit</th>
-  <th>Actions</th>
+              <th>Exercise Name</th>
+              <th>Unit</th>
+              <th>Calorie Burn</th>
+              <th>Actions</th>
             </tr>
           </thead>
-
-
           <tbody>
-            {foods.map((food, index) => (
-
-              <tr key={food.id}>
+            {exercises.map((exercise, index) => (
+              <tr key={exercise.id}>
                 <td>
                   <img
-                    src={food.image_url}
-                      alt="food-image"
+                    src={exercise.image_url}
+                    alt="food-image"
                     className="table-img"
-                   
                     style={{ width: "40px", height: "40px", borderRadius: "5px", objectFit: "cover" }}
                   />
                 </td>
-                <td>{food.food_name}</td>
-                   <td>{food.unit}</td>
-                <td>{food.calories_per_unit}/kcal</td>
+                <td>{exercise.exercise_name}</td>
+                <td>{exercise.unit}</td>
+                <td>{exercise.calories_per_unit} kcal</td>
                 <td>
-
-
                   <div className="action-buttons" style={{ display: "flex", gap: "10px" }}>
                     <Pencil
                       size={18}
@@ -153,42 +115,34 @@ const FoodMaster = () => {
                         setIsPopupOpen(true);
                       }}
                     />
-
                     <Trash2
                       size={18}
-                        className="action-icon"
+                      className="action-icon"
                       style={{ cursor: "pointer", color: "gray" }}
-                        onClick={() => deleteFood(index)}
+                      onClick={() => deleteExercise(index)}
                     />
                   </div>
-
                 </td>
               </tr>
             ))}
-
           </tbody>
-
         </table>
       </div>
 
 
       {isPopupOpen && (
-        <FoodPopup
+        <ExercisePopup
         onClose={() => {
-       setIsPopupOpen(false);
+          setIsPopupOpen(false);
           setEditingIndex(null);
         }}
-           onSave={handleSaveFood}
-        editTaskData={editingIndex !== null ? foods[editingIndex] : null}
+        onSave={handleSaveExercise}
+        editTaskData={editingIndex !== null ? exercises[editingIndex] : null}
         />
       )}
-
       <Pagination />
     </div>
   );
 };
 
-export default FoodMaster;
-
-
-
+export default ExerciseMaster;

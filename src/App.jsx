@@ -6,7 +6,8 @@ import Dashboard from "./components/Dashboard";
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
 import FoodMaster from "./components/FoodMaster";
-
+import ExerciseMaster from "./components/ExerciseMaster";
+import FoodEntries from "./components/FoodEntries";
 
 
 const AppContent = () => {
@@ -39,6 +40,9 @@ const AppContent = () => {
             <Routes>
               <Route path="/dashboard" element={<Dashboard />} />
              <Route path="/food-master" element={<FoodMaster />} />
+             <Route path="/exercise-master" element={<ExerciseMaster />} />
+             <Route path="/food-entries" element={<FoodEntries />} />
+
               
             </Routes>
           </div>

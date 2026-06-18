@@ -541,8 +541,173 @@ button, input {
   text-align: center;
 }
 
-.wrap{
+
+
+/* TABLESsssssssssssssss */
+
+.table-container {
+  margin-top: 20px;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.app-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.app-table th, 
+.app-table td {
+  padding: 12px 15px;
+  border: 1px solid #ebeded;
+  text-align: left;
+  font-size: 14px;
+}
+
+.app-table th {
+  background-color: #f8fafc;
+  color: #475569;
+  font-weight: 600;
+}
+
+.app-table td {
+  color: #0f172a;
+}
+
+.table-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+
+
+/* PAGINATION styling */
+
+.pagination-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 25px;
+}
+
+.pagination-btn {
+  padding: 6px 12px;
+  border: 1px solid #cbd5e1;
+  background: white;
+  color: #475569;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.pagination-btn:hover {
+  background: #f1f5f9;
+}
+
+.pagination-current {
+  font-weight: bold;
+  padding: 6px 12px;
+  background: #e2e8f0;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  color: #0f172a;
+  font-size: 13px;
+}
+
+
+
+
+
+/* POPUPS */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  width: 450px;
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+}
+
+.popup-content h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #0f172a;
+}
+
+.popup-content form {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 15px;
+}
+
+.popup-content .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.popup-content label {
+  font-weight: 600;
+  font-size: 13px;
+  color: #334155;
+}
+
+.popup-content input, 
+.popup-content select {
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  outline: none;
+  font-size: 14px;
+}
+
+.popup-content input:focus, 
+.popup-content select:focus {
+  border-color: #64748b;
+}
+
+.popup-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.popup-btn {
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  background-color: #5d5a5a;
+  cursor: pointer;
+}
+
+.popup-btn:hover {
+  background-color: #475569;
+}
+
+.cancel-btn {
+  background-color: #e2e8f0;
+  color: #334155;
+}
+
+.cancel-btn:hover {
+  background-color: #cbd5e1;
 }
