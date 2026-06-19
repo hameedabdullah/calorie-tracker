@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const db = require("./db")
 const bcrypt = require("bcrypt");
+const initializeDatabase = require("./database/initDatabase");
 
 const app = express();
 
@@ -87,11 +88,6 @@ app.post("/login", async (req, res) => {
     }
 });
 
-const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
 
 
 
@@ -414,6 +410,24 @@ app.get("/dashboard", async (req, res) => {
         res.status(500).json(err);
     }
 });
+
+
+
+const PORT = process.env.PORT || 5000;
+
+async function startServer() {
+
+    await initializeDatabase();
+
+    app.listen(PORT, () => {
+
+        console.log(`Server is running on port ${PORT}`);
+
+    });
+
+}
+
+startServer();
 
 
 
