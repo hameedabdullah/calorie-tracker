@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import toast from "react-hot-toast";
 import { Pencil, Trash2 } from "lucide-react";
 import FoodEntriesPopup from "./FoodEntriesPopup";
 import Pagination from "./Pagination";
@@ -10,6 +9,7 @@ const FoodEntries = () => {
   const [editingIndex, setEditingIndex] = useState(null);
 
   useEffect(() => {
+
     fetch("http://localhost:5000/food-entries")
       .then((response) => response.json())
       .then((data) => {
@@ -34,8 +34,10 @@ const FoodEntries = () => {
       const updatedData = await updatedResponse.json();
       setEntries(updatedData);
       setEditingIndex(null);
-      toast.success("Food entry updated successfully!");
-    } else {
+    } 
+    
+    
+    else {
       await fetch("http://localhost:5000/food-entries", {
         method: "POST",
         headers: {
@@ -46,7 +48,6 @@ const FoodEntries = () => {
       const updatedResponse = await fetch("http://localhost:5000/food-entries");
       const updatedData = await updatedResponse.json();
       setEntries(updatedData);
-      toast.success("Food entry added successfully!");
     }
     setIsPopupOpen(false);
   };
@@ -57,7 +58,6 @@ const FoodEntries = () => {
     const updatedResponse = await fetch("http://localhost:5000/food-entries");
     const updatedData = await updatedResponse.json();
     setEntries(updatedData);
-    toast.success("Food entry deleted successfully!");
   };
 
   
@@ -85,6 +85,9 @@ const FoodEntries = () => {
               <th>Actions</th>
             </tr>
           </thead>
+
+
+
           <tbody>
             {entries.map((entri, index) => (
               <tr key={entri.id}>
@@ -114,6 +117,8 @@ const FoodEntries = () => {
                 </td>
               </tr>
             ))}
+
+            
           </tbody>
         </table>
       </div>
@@ -135,3 +140,5 @@ const FoodEntries = () => {
 };
 
 export default FoodEntries;
+
+

@@ -12,10 +12,6 @@ const FoodMaster = () => {
 
   const [editingIndex, setEditingIndex] = useState(null);
 
-  // useEffect(() => {
-    //     localStorage.setItem("mytodos", JSON.stringify(todos));
-    // }, [todos])
-
 
   useEffect(() => {
 
@@ -54,7 +50,6 @@ const FoodMaster = () => {
 
       setEditingIndex(null);
 
-      toast.success("Food updated successfully!");
 
     } else {
       await fetch("http://localhost:5000/food-master", {
@@ -70,7 +65,6 @@ const FoodMaster = () => {
 
       setFoods(updatedData);
 
-      toast.success("Food added successfully!");
     }
     setIsPopupOpen(false);
   };
@@ -88,7 +82,6 @@ const FoodMaster = () => {
 
     setFoods(updatedData);
 
-    toast.success("Food deleted successfully!");
   };
 
   return (

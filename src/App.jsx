@@ -8,12 +8,13 @@ import Navbar from "./components/Navbar";
 import FoodMaster from "./components/FoodMaster";
 import ExerciseMaster from "./components/ExerciseMaster";
 import FoodEntries from "./components/FoodEntries";
+import ExerciseEntries from "./components/ExerciseEntries";
+import Reports from "./components/Reports";
 
 
 const AppContent = () => {
   const location = useLocation();
 
-  // If we in the LoginSignup page, we do not show Sidebar and Navbar
   const AuthPage = location.pathname === "/" || location.pathname === "/login" || location.pathname === "/signup";
 
   if (AuthPage) {
@@ -42,6 +43,8 @@ const AppContent = () => {
              <Route path="/food-master" element={<FoodMaster />} />
              <Route path="/exercise-master" element={<ExerciseMaster />} />
              <Route path="/food-entries" element={<FoodEntries />} />
+             <Route path="/exercise-entries" element={<ExerciseEntries />} />
+             <Route path="/reports" element={<Reports />} />
 
               
             </Routes>

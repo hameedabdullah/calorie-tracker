@@ -19,7 +19,6 @@ const Signup = () => {
       }),
     });
 
-    //parse panrom
 
     const result = await response.json()
 

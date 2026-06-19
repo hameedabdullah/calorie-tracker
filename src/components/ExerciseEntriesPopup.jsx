@@ -1,33 +1,36 @@
 import React, { useState, useEffect } from "react";
 
-const FoodEntriesPopup = ({ onClose, onSave, editTaskData }) => {
-  const [foods, setFoods] = useState([]);
-  const [foodId, setFoodId] = useState("");
-  const [unit, setUnit] = useState("g"); // Default option
+const ExerciseEntriesPopup = ({ onClose, onSave, editTaskData }) => {
+  const [exercises, setExercises] = useState([]);
+  const [exerciseId, setExerciseId] = useState("");
+  const [unit, setUnit] = useState("min"); 
   const [quantity, setQuantity] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:5000/food-master")
+
+    fetch("http://localhost:5000/exercise-master")
+
       .then((response) => response.json())
       .then((data) => {
-        setFoods(data);
+
+        setExercises(data);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [editTaskData]); 
-  
+  }, [editTaskData]);
 
   useEffect(() => {
-
-
-
     if (editTaskData) {
-      setFoodId(editTaskData.food_id);
+
+      setExerciseId(editTaskData.exercise_id);
+
       setUnit(editTaskData.unit);
+
       setQuantity(editTaskData.quantity);
     } else {
-      setUnit("g");
+
+      setUnit("min");
       setQuantity("");
     }
   }, [editTaskData]);
@@ -35,18 +38,18 @@ const FoodEntriesPopup = ({ onClose, onSave, editTaskData }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-   
     if (!unit) {
-      alert("Select unit before clicking the save button");
+      alert("Select unit then click add button ");
       return;
     }
     if (!quantity || parseFloat(quantity) <= 0) {
-      alert("Enter a valid quantity before clicking the save button");
+      alert("Enter a valid quantity ");
       return;
     }
 
     onSave({
-      food_id: parseInt(foodId),
+        
+      exercise_id: parseInt(exerciseId),
       unit: unit,
       quantity: parseFloat(quantity)
     });
@@ -55,19 +58,19 @@ const FoodEntriesPopup = ({ onClose, onSave, editTaskData }) => {
   return (
     <div className="popup-overlay" onClick={onClose}>
       <div className="popup-content" onClick={(e) => e.stopPropagation()}>
-        <h3>{editTaskData ? "EDIT FOOD ENTRY" : "ADD FOOD ENTRY"}</h3>
+        <h3>{editTaskData ? "EDIT EXERCISE ENTRY" : "ADD EXERCISE ENTRY"}</h3>
 
         <form onSubmit={handleSubmit}>
           <div className="form-group" style={{ display: "flex", flexDirection: "column", gap: "5px", padding: "0 15px", marginBottom: "15px" }}>
-            <label style={{ fontWeight: "600", fontSize: "14px", color: "gray" }}>Food Name</label>
+            <label style={{ fontWeight: "600", fontSize: "14px", color: "gray" }}>Exercise Name</label>
             <select
-              value={foodId}
-              onChange={(e) => setFoodId(e.target.value)}
+              value={exerciseId}
+              onChange={(e) => setExerciseId(e.target.value)}
               style={{ padding: "12px", border: "1px solid #ccc", borderRadius: "5px", background: "white", width: "100%" }}
             >
-              {foods.map((food) => (
-                <option key={food.id} value={food.id}>
-                  {food.food_name}
+              {exercises.map((ex) => (
+                <option key={ex.id} value={ex.id}>
+                  {ex.exercise_name}
                 </option>
               ))}
             </select>
@@ -80,10 +83,8 @@ const FoodEntriesPopup = ({ onClose, onSave, editTaskData }) => {
               onChange={(e) => setUnit(e.target.value)}
               style={{ padding: "12px", border: "1px solid #ccc", borderRadius: "5px", background: "white", width: "100%" }}
             >
-              <option value="g">g</option>
-              <option value="kg">kg</option>
-              <option value="ml">ml</option>
-              <option value="l">l</option>
+              <option value="min">min</option>
+              <option value="rep">rep</option>
             </select>
           </div>
 
@@ -91,6 +92,7 @@ const FoodEntriesPopup = ({ onClose, onSave, editTaskData }) => {
             <label style={{ fontWeight: "600", fontSize: "14px", color: "gray" }}>Quantity</label>
             <input
               type="number"
+              step="any"
               placeholder="Quantity"
               value={quantity}
               onChange={(e) => setQuantity(e.target.value)}
@@ -112,4 +114,4 @@ const FoodEntriesPopup = ({ onClose, onSave, editTaskData }) => {
   );
 };
 
-export default FoodEntriesPopup;
+export default ExerciseEntriesPopup;

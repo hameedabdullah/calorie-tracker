@@ -11,7 +11,7 @@
   --primary-hover: #1e293b;
   --accent-color: #4f46e5;
   --accent-hover: #4338ca;
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-sans: 'Inter';
 }
 
 * {
@@ -28,9 +28,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* overflow-x: hidden; */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+ 
 }
 
 #root {
@@ -276,7 +274,6 @@ button, input {
 .footer-link {
   background: none;
   border: none;
-  padding: 0;
   color: var(--accent-color);
   font-size: 13.5px;
   font-weight: 600;
@@ -298,7 +295,6 @@ button, input {
     min-height: auto;
     border-radius: 12px;
     border: 1px solid var(--border-color);
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.03), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
   }
 
   .auth-banner {
@@ -358,7 +354,7 @@ button, input {
 
 
 
-/* idhu CALORIRE TRACKER APP ODA STYLES */
+/* THIS CALORIRE TRACKER APP ODA STYLES */
 
 .whole {
   height: 100vh;
@@ -430,7 +426,7 @@ button, input {
   flex-direction: column;
 }
 
-/* NAVBAR ODA STYLES*/
+/* NAVBAR  STYLES*/
 .navbar {
   width: 100%;
   display: flex;
@@ -455,7 +451,7 @@ button, input {
 }
 
 
-/* IDHU cONTENT AREA & PAGE CONTAINER styling */
+/*  CONTENT AREA      and        PAGE CONTAINER styling */
 .content-area {
   flex: 1;
   overflow-y: auto;
@@ -487,7 +483,7 @@ button, input {
 }
 
 
-/* DASHBOARDtyling */
+/* DASHBOARD STYLING */
 .dashboard-page {
   background: white;
   padding: 25px;
@@ -561,7 +557,7 @@ button, input {
 .app-table td {
   padding: 12px 15px;
   border: 1px solid #ebeded;
-  text-align: left;
+  text-align: center;
   font-size: 14px;
 }
 

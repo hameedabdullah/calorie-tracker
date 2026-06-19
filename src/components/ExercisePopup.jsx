@@ -32,6 +32,7 @@ const ExercisePopup = ({ onClose, onSave, editTaskData }) => {
   };
 
   useEffect(() => {
+    
     if (editTaskData) {
       setExerciseName(editTaskData.exercise_name);
       setUnit(editTaskData.unit || "reps");
